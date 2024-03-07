@@ -20,7 +20,5 @@ $ Hash: hashexample
 
 ## Verify the Hash:
 
-- Compare the calculated hash with the expected hash provided by the file source.
-
-- The hash exposed by this program **MUST** match the one provided by the file source.
+Compare the calculated hash with the expected hash provided by the file source. The hash exposed by this program **MUST** match the one provided by the file source.
 
