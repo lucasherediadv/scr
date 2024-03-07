@@ -1,6 +1,6 @@
 # File integrity checker
 
-Check the integrity of a file based on the hash provided by the file source.
+Check the integrity of a file based on their provided hash. By comparing the calculated hash with the expected hash, you can ensure that files have not been tampered with.
 
 # How to use
 
@@ -18,5 +18,9 @@ $ File: path/to/file
 $ Hash: hashexample
 ```
 
-The hash that this program exposes **MUST** match the one provided by source of the file.
+## Verify the Hash:
+
+- Compare the calculated hash with the expected hash provided by the file source.
+
+- The hash exposed by this program **MUST** match the one provided by the file source.
 
