@@ -1,6 +1,6 @@
-# What I'am trying to achieve?
+# File integrity checker
 
-Check the integrity of a file that I have downloaded based on the SHA256-Hash provided by the source.
+Check the integrity of a file based on the Hash provided by the source.
 
 # How to use
 
@@ -15,8 +15,8 @@ $ Enter the directory path to check integrity: ~/Downloads/dir_example/
 The output would be something like this
 ```
 $ File: path/to/file
-$ SHA-256 hash: hashexample
+$ Hash: hash
 ```
 
-Then, the hash **MUST** coincide with the provided by the source
+The hash **MUST** coincide with the provided by the source
 
