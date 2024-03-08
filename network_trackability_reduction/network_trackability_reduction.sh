@@ -7,7 +7,7 @@
 RANDOM_MAC_CONFIG_FILE=="/etc/NetworkManager/conf.d/99-random-mac.conf"
 
 # Create the configuration file or overwrite if it already exists
-cat <<EOF > "$CONF_FILE"
+cat <<EOF > "$RANDOM_MAC_CONFIG_FILE"
 [device]
 wifi.scan-rand-mac-address=yes
 
@@ -17,7 +17,7 @@ ethernet.cloned-mac-address=random
 EOF
 
 # Set appropriate permissions to the file
-chmod 644 $CONF_FILE
+chmod 644 "$RANDOM_MAC_CONFIG_FILE"
 
 # Reload NetworkManager configuration
 sudo nmcli general reload conf
