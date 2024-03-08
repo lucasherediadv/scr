@@ -1,9 +1,10 @@
 #!/bin/bash
-#
-# Description
 
-# Path to the configuration file
-CONF_FILE="/etc/NetworkManager/conf.d/99-random-mac.conf"
+#
+# Configure random MAC addresses for NetworkManager
+#
+
+RANDOM_MAC_CONFIG_FILE=="/etc/NetworkManager/conf.d/99-random-mac.conf"
 
 # Create the configuration file or overwrite if it already exists
 cat <<EOF > "$CONF_FILE"
@@ -18,16 +19,27 @@ EOF
 # Set appropriate permissions to the file
 chmod 644 $CONF_FILE
 
-echo "Configuration file $CONF_FILE created succsesfully"
-
 # Reload NetworkManager configuration
 sudo nmcli general reload conf
 
+#
+# Remove static hostname to prevent hostname broadcast
+#
+
+sudo hostnamectl "localhost"
+
+#
 # Disable sendind hostname to DHCP server
+# This configuration will leak your hostname on first connection.
+# Setting a generic or random hostname is strongly recommended if possible.
+#
+# This configuration is virtually useless without
+# also randomizing MAC addreses by default
+#
 
-CONNECTION_UUID="your_connection_uuid_here" # Assuming you'll pass the connection UUID as an argument
+NO_SEND_HOSTNAME="/etc/NetworkManager/dispatcher.d/no-wait.d/01-no-send-hostname.sh"
 
-cat <<EOF | sudo tee /etc/NetworkManager/dispatcher.d/no-wait.d/01-no-send-hostname.sh > /dev/null
+cat <<EOF > "$NO_SEND_HOSTNAME"
 #! /bin/bash
 
 if [ "$(nmcli -g 802-11-wireless.cloned-mac-address c show "$CONNECTION_UUID")" = 'permanent' ] \
@@ -44,8 +56,11 @@ fi
 EOF
 
 # Set ownership and permissions
-sudo chown root:root /etc/NetworkManager/dispatcher.d/no-wait.d/01-no-send-hostname.sh
+sudo chown root:root "$NO_SEND_HOSTNAME"
+
+# Set permissions to 744 (rwxr--r--)
+sudo chmod 744 "$NO_SEND_HOSTNAME"
 
 # Create the symbolic link
-sudo ln -s /etc/NetworkManager/dispatcher.d/no-wait.d/01-no-send-hostname.sh ./
+sudo ln -s "$NO_SEND_HOSTNAME" ./
 
