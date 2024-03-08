@@ -4,7 +4,7 @@
 # Configure random MAC addresses for NetworkManager
 #
 
-RANDOM_MAC_CONFIG_FILE=="/etc/NetworkManager/conf.d/99-random-mac.conf"
+RANDOM_MAC_CONFIG_FILE="/etc/NetworkManager/conf.d/99-random-mac.conf"
 
 # Create the configuration file or overwrite if it already exists
 cat <<EOF > "$RANDOM_MAC_CONFIG_FILE"
