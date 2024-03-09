@@ -1,10 +1,7 @@
-#!/bin/bash
+#!/bin/bash -eu
 
-#
-# Configure random MAC addresses for NetworkManager
-#
-
-RANDOM_MAC_CONFIG_FILE="/etc/NetworkManager/conf.d/99-random-mac.conf"
+# Configuration file path
+RANDOM_MAC_CONFIG_FILE="/etc/NetworkManager/conf.d/random-mac-addresses.conf"
 
 # Create the configuration file or overwrite if it already exists
 cat <<EOF > "$RANDOM_MAC_CONFIG_FILE"
@@ -16,11 +13,10 @@ wifi.scan-rand-mac-address=yes
 [connection]
 wifi.cloned-mac-address=random
 ethernet.cloned-mac-address=random
-
 EOF
 
 # Set appropriate permissions to the file
-chmod 640 "$RANDOM_MAC_CONFIG_FILE"
+chmod go-rwx,u+rw "$RANDOM_MAC_CONFIG_FILE"
 
 # Reload NetworkManager configuration
 sudo nmcli general reload conf
