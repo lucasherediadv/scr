@@ -3,7 +3,7 @@
 - MAC address spoofing and randomization.
 - Remove the static hostname to prevent hostname broadcast.
 
-## Why?
+## Motivation
 
 Ensure packages updates do not overwrite the configuration, and if that happens, just run this script.
 
@@ -13,7 +13,7 @@ Make the script executable
 ```
 $ chmod +x trackability_reduction
 ```
-Execute the script
+Run the script
 ```
 $ sudo ./trackability_reduction
 ```
