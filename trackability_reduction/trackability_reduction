@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#
+# Configure random MAC addresses for NetworkManager
+#
+
+RANDOM_MAC_CONFIG_FILE="/etc/NetworkManager/conf.d/99-random-mac.conf"
+
+# Create the configuration file or overwrite if it already exists
+cat <<EOF > "$RANDOM_MAC_CONFIG_FILE"
+# This configuration Randomize all MAC addresses by default.
+# These settings can be overriden on a per-connection basis.
+[device]
+wifi.scan-rand-mac-address=yes
+
+[connection]
+wifi.cloned-mac-address=random
+ethernet.cloned-mac-address=random
+
+EOF
+
+# Set appropriate permissions to the file
+chmod 640 "$RANDOM_MAC_CONFIG_FILE"
+
+# Reload NetworkManager configuration
+sudo nmcli general reload conf
+
+# Remove static hostname to prevent hostname broadcast
+sudo hostnamectl set-hostname "localhost"
+
