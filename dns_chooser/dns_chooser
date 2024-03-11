@@ -1,0 +1,5 @@
+#!/bin/bash
+
+QUAD9_IPV4="9.9.9.9"
+QUAD9_IPV6="2620:fe::fe"
+
