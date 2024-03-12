@@ -1,4 +1,4 @@
-#!/bin/bash -eu
+#!/bin/bash
 
 # Configuration file path
 RANDOM_MAC_CONFIG_FILE="/etc/NetworkManager/conf.d/random-mac-addresses.conf"
