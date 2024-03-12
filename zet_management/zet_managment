@@ -1,5 +1,29 @@
 #!/bin/bash
 
-QUAD9_IPV4="9.9.9.9"
-QUAD9_IPV6="2620:fe::fe"
+get_filename() {
+  read -p "Enter the filename (without extension): " filename
+}
+
+open_file() {
+  local target_directory="$1"
+  local filename="$2"
+  local full_filename="$target_directory/$filename.md"
+
+  touch "$full_filename"
+
+  timestamp="$(date +"%Y-%m-%d-%H:%m")"
+
+  {
+    echo "# ${filename[@]^}"
+    echo -en "\n"
+    echo "$timestamp"
+  } >>"$full_filename"
+  
+  vim "$full_filename"
+}
+
+target_directory="/home/user/Projects/zettelkasten"
+
+get_filename
+open_file "$target_directory" "$filename"
 
