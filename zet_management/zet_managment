@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# TODO
+# check if the file already exists
+# reprompt the user if no filename is provided
+# if more than one argument is given, print error message and stop script
+
 get_filename() {
   read -p "Enter the filename (without extension): " filename
 }
@@ -13,15 +18,22 @@ open_file() {
 
   timestamp="$(date +"%Y-%m-%d-%H:%m")"
 
+  # Capitalize the first word of the filename and replace hyphens and
+  # underscores with a single blank space
+  format_filename=$(echo "$filename" | sed 's/[-_]/ /g; s/^./\u&/')
+
   {
-    echo "# ${filename[@]^}"
+    echo "# $format_filename"
     echo -en "\n"
     echo "$timestamp"
+    echo -en "\n""\n"
   } >>"$full_filename"
   
-  vim "$full_filename"
+  # Open vim in normal mode and position the cursor at the last line
+  vim '+ normal G' "$full_filename"
 }
 
+# Create the file in the following directory
 target_directory="/home/user/Projects/zettelkasten"
 
 get_filename
