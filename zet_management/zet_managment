@@ -1,12 +1,17 @@
 #!/bin/bash
 
 # TODO
-# check if the file already exists
-# reprompt the user if no filename is provided
-# if more than one argument is given, print error message and stop script
+# Check if the file already exists
 
 get_filename() {
-  read -p "Enter the filename (without extension): " filename
+  while true; do
+    read -p "Enter the filename (without extension): " filename
+    if [[ -z "$filename" ]] then
+      echo "Please provide a valid filename"
+    else
+      break
+    fi
+  done
 }
 
 open_file() {
@@ -16,16 +21,16 @@ open_file() {
 
   touch "$full_filename"
 
-  timestamp="$(date +"%Y-%m-%d-%H:%m")"
+  timestamp="$(date +"%Y-%m-%d-%H:%M:%S")"
 
   # Capitalize the first word of the filename and replace hyphens and
   # underscores with a single blank space
   format_filename=$(echo "$filename" | sed 's/[-_]/ /g; s/^./\u&/')
 
   {
-    echo "# $format_filename"
+    echo "# $timestamp"
     echo -en "\n"
-    echo "$timestamp"
+    echo "## $format_filename"
     echo -en "\n""\n"
   } >>"$full_filename"
   
