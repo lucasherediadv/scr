@@ -1,14 +1,14 @@
 # Zet management
 
-Quickly create new notes in the required format and store in the specified directory  from anywhere in the system
+Quickly create new notes in the required format and store them in the specified directory from anywhere in the system.
 
 ## Setup
 
-Ensure that the script is executable:
+Make sure that the script is executable:
 ```
 $ chmod +x zet
 ```
-Update your PATH Environment Variable:
+Update your path environment variable:
 ```
 $ export PATH=$PATH:~/path_to_dir
 ```
@@ -19,7 +19,7 @@ $ source ~/.bashrc
 
 ## How to use
 
-Simply call the script by the name:
+Simply call the script by its name:
 ```
 $ zet
 ```
