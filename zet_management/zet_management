@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Prompt the user for a filename
 get_filename() {
   while true; do
     read -rp "Enter the filename (without extension): " filename
@@ -11,19 +12,23 @@ get_filename() {
   done
 }
 
+# Create and open file
 open_file() {
   local target_directory="$1"
   local filename="$2"
   local full_filename="$target_directory/$filename.md"
 
+  # Create an empty markdown file
   touch "$full_filename"
 
+  # Get the current timestamp
   timestamp="$(date +"%Y-%m-%d-%H:%M:%S")"
 
   # Capitalize the first word of the filename and replace hyphens and
   # underscores with a single blank space
   format_filename=$(echo "$filename" | sed 's/[-_]/ /g; s/^./\u&/')
 
+  # Add header and initial content to the file
   {
     echo "# $timestamp"
     echo -en "\n"
@@ -38,6 +43,7 @@ open_file() {
 # Create the file in the following directory
 target_directory="/home/user/Projects/zettelkasten"
 
+# Call the functions
 get_filename
 open_file "$target_directory" "$filename"
 
