@@ -41,7 +41,7 @@ open_file() {
 }
 
 # Create the file in the following directory
-target_directory="/home/user/Projects/zettelkasten"
+target_directory="/home/user/Projects/notes"
 
 # Call the functions
 get_filename
