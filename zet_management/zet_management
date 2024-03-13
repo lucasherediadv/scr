@@ -1,12 +1,9 @@
 #!/bin/bash
 
-# TODO
-# Check if the file already exists
-
 get_filename() {
   while true; do
-    read -p "Enter the filename (without extension): " filename
-    if [[ -z "$filename" ]] then
+    read -rp "Enter the filename (without extension): " filename
+    if [[ -z "$filename" ]]; then
       echo "Please provide a valid filename"
     else
       break
