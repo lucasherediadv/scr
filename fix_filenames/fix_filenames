@@ -1,16 +1,16 @@
 #!/bin/bash
 
-for file in *; do
+for current_file in *; do
   # Check if the file ends with ".sh" and is executable
-  if [[ "$file" == *.sh && -x "$file" ]]; then
+  if [[ "$current_file" == *.sh && -x "$current_file" ]]; then
     # Remove the ".sh" extension
-    new_name="${file%.sh}"
-    mv "$file" "$new_name"
+    new_cleaned_file="${current_file%.sh}"
+    mv "$current_file" "$new_cleaned_file"
   else
     # Replace whitespace with underscores and remove any character that are
-    # not alphanumeric, underscores, or hyphens.
-    new_name=$(echo "$file" | tr ' ' _ | sed -E 's/[^[:alnum:]_-]+//g')
-    mv "$file" "$new_name"
+    # not alphanumeric, underscore, hyphens, or dots.
+    new_cleaned_file=$(echo "$current_file" | tr ' ' _ | sed -E 's/[^[:alnum:]_.-]+//g')
+    mv "$current_file" "$new_cleaned_file"
   fi
 done
 
