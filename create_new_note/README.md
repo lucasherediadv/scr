@@ -1,4 +1,4 @@
-# Zet management
+# Create new note
 
 Quickly create new notes in the required format and store them in the specified directory from anywhere in the system.
 
@@ -21,6 +21,6 @@ $ source ~/.bashrc
 
 Simply call the script by its name:
 ```
-$ zet
+$ note
 ```
 
