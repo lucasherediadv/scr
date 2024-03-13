@@ -1,6 +1,4 @@
 #!/bin/bash
-#
-# Rename all files in a directory based on a set of rules.
 
 for file in *; do
   # Check if the file ends with ".sh" and is executable
@@ -9,8 +7,9 @@ for file in *; do
     new_name="${file%.sh}"
     mv "$file" "$new_name"
   else
-    # Replace whitespace with underscores and remove special characters
-    new_name=$(echo "$file" | tr ' ' _ | sed 's/[][ #/()&\\]//g')
+    # Replace whitespace with underscores and remove any character that are
+    # not alphanumeric, underscores, or hyphens.
+    new_name=$(echo "$file" | tr ' ' _ | sed -E 's/[^[:alnum:]_-]+//g')
     mv "$file" "$new_name"
   fi
 done
