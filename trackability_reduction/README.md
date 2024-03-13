@@ -1,7 +1,6 @@
 # Trackability Reduction
 
-- MAC address spoofing and randomization.
-- Remove the static hostname to prevent hostname broadcast.
+MAC address spoofing and randomization.
 
 ## Motivation
 
