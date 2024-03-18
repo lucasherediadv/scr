@@ -6,21 +6,30 @@ DOTFILES_DIR="$PROJECTS_DIR/dotfiles"
 ALIAS="d"
 GIT_REPO_URL="git@github.com:lucasherediadv/dotfiles.git"
 
+# Create projects direcotry if it dosen't exist
 mkdir -p "$PROJECTS_DIR"
 
+# Set git alias for dotfiles
 alias "$ALIAS"="/usr/bin/git --git-dir=$DOTFILES_DIR/ --work-tree=$HOME"
 
+# Source repository ignore the folder where you will clone it
+# So that you don't create weird recursion problems
 echo "$DOTFILES_DIR" >> "$HOME/.gitignore"
 
+# Clone bare git repository inside DOTFILES_DIR
 git clone --bare "$GIT_REPO_URL" "$DOTFILES_DIR"
 
+# Checkout the actual content from the bare repository to your $HOME
 d checkout
+
+# Handle existing dotfiles
 if [ $? = 0 ]; then
     echo "Checked out config.";
 else
-    echo "Backing up pre-existing dotfile";
+    echo "Backing up pre-existing dotfiles";
     d checkout 2>&1 | egrep "\s+/." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
 fi;
-d checkout
+
+# Configure git to ignore untracked files
 d config status.showUntrackedFiles no
 
