@@ -1,0 +1,25 @@
+#!/bin/bash
+
+PROJECTS_DIR="$HOME/Projects"
+DOTFILES_DIR="$PROJECTS_DIR/dotfiles"
+ALIAS="d"
+GIT_REPO_URL="<git_repo_url>"
+
+mkdir -p "$PROJECTS_DIR"
+
+alias "$ALIAS"="/usr/bin/git --git-dir=$DOTFILES_DIR/ --work-tree=$HOME"
+
+echo "$DOTFILES_DIR" >> "$HOME/.gitignore"
+
+git clone --bare "GIT_REPO_URL" "$DOTFILES_DIR"
+
+d checkout
+if [ $? = 0 ]; then
+    echo "Checked out config.";
+else
+    echo "Backing up pre-existing dotfile";
+    d checkout 2>&1 | egrep "\s+/." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
+fi;
+d checkout
+d config status.showUntrackedFiles no
+
