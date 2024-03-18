@@ -1,9 +1,10 @@
 #!/bin/bash
 
+# Change this values for a custom setup
 PROJECTS_DIR="$HOME/Projects"
 DOTFILES_DIR="$PROJECTS_DIR/dotfiles"
 ALIAS="d"
-GIT_REPO_URL="<git_repo_url>"
+GIT_REPO_URL="git@github.com:lucasherediadv/dotfiles.git"
 
 mkdir -p "$PROJECTS_DIR"
 
@@ -11,7 +12,7 @@ alias "$ALIAS"="/usr/bin/git --git-dir=$DOTFILES_DIR/ --work-tree=$HOME"
 
 echo "$DOTFILES_DIR" >> "$HOME/.gitignore"
 
-git clone --bare "GIT_REPO_URL" "$DOTFILES_DIR"
+git clone --bare "$GIT_REPO_URL" "$DOTFILES_DIR"
 
 d checkout
 if [ $? = 0 ]; then
