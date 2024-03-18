@@ -1,8 +1,8 @@
 # Scripts
 
-Collection of the utilities that I wrote to better interact with my system
+Collection of utilities that I have written to improve the interaction with my system. These scripts are primarly intended to be run in a bash terminal.
 
-## Usage
+## Structure
 
-Each folder contains the main program and a `README.md` in which I describe the purpose of the script and how to use it
+Each folder has a main program and a `README.md` which describes the purpose of the script and how to use it.
 
