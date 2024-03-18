@@ -1,6 +1,6 @@
 # Setup dotfiles
 
-Simple script to quickly setup my configuration files in another system.
+Quickly setup my configuration files in another system.
 
 ## How to use
 
