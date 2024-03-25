@@ -5,6 +5,8 @@ from pathlib import Path
 CHUNK_SIZE = 65536
 HASH_ALGORITHM = hashlib.sha256
 
+# TODO: prompt the user for enter the hash, and compare the calculated hash
+# with the provided by the user
 
 def validate_directory(directory_path):
     """
