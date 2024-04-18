@@ -1,12 +1,11 @@
 #!/bin/bash
 
 # Change this values for a custom setup
-PROJECTS_DIR="$HOME/Projects"
-DOTFILES_DIR="$PROJECTS_DIR/dotfiles"
+DOTFILES_DIR="$HOME/.dotfiles"
 GIT_REPO_URL="git@github.com:lucasherediadv/dotfiles.git"
 
-# Create projects directory if it dosen't exist
-mkdir -p "$PROJECTS_DIR"
+# Create dotfiles directory if it dosen't exist
+mkdir -p "$DOTFILES_DIR"
 
 # Set git alias for dotfiles
 alias dotfiles="/usr/bin/git --git-dir=$DOTFILES_DIR/ --work-tree=$HOME"
@@ -19,16 +18,16 @@ echo "$DOTFILES_DIR" >> "$HOME/.gitignore"
 git clone --bare "$GIT_REPO_URL" "$DOTFILES_DIR"
 
 # Checkout the actual content from the bare repository to your $HOME
-d checkout
+dotfiles checkout
 
 # Handle existing dotfiles
 if [ $? = 0 ]; then
     echo "Checked out config.";
 else
     echo "Backing up pre-existing dotfiles";
-    d checkout 2>&1 | egrep "\s+/." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
+  dotfiles checkout 2>&1 | egrep "\s+/." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
 fi;
 
 # Configure git to ignore untracked files
-d config status.showUntrackedFiles no
+dotfiles config status.showUntrackedFiles no
 
