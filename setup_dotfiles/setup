@@ -1,10 +1,12 @@
 #!/bin/bash
+#
+# Quickly setup my configuration files on another system
 
-# Clone dotfile here
-DOTFILES_DIR="$HOME/.dotfiles"
-
-# Clone dotfiles from here
+# Clone from here...
 GIT_REPO_URL="https://github.com/lucasherediadv/dotfiles.git"
+
+# to here
+DOTFILES_DIR="$HOME/.dotfiles"
 
 # Create dotfiles directory if it dosen't exist
 mkdir "$DOTFILES_DIR"
