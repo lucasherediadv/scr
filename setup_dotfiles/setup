@@ -1,32 +1,27 @@
 #!/bin/bash
 
-# Change this values for a custom setup
+# Clone dotfile here
 DOTFILES_DIR="$HOME/.dotfiles"
-GIT_REPO_URL="git@github.com:lucasherediadv/dotfiles.git"
+
+# Clone dotfiles from here
+GIT_REPO_URL="https://github.com/lucasherediadv/dotfiles.git"
 
 # Create dotfiles directory if it dosen't exist
-mkdir -p "$DOTFILES_DIR"
+mkdir "$DOTFILES_DIR"
 
 # Set git alias for dotfiles
-alias dotfiles="/usr/bin/git --git-dir=$DOTFILES_DIR/ --work-tree=$HOME"
+alias dotfiles='/usr/bin/git --git-dir=$DOTFILES_DIR/ --work-tree=$HOME'
 
 # Source repository ignore the folder where you will clone it
-# So that you don't create weird recursion problems
+# so that you don't create weird recursion problems
 echo "$DOTFILES_DIR" >> "$HOME/.gitignore"
 
-# Clone bare git repository inside DOTFILES_DIR
+# Clone bare git repository
 git clone --bare "$GIT_REPO_URL" "$DOTFILES_DIR"
 
-# Checkout the actual content from the bare repository to your $HOME
-dotfiles checkout
-
-# Handle existing dotfiles
-if [ $? = 0 ]; then
-    echo "Checked out config.";
-else
-    echo "Backing up pre-existing dotfiles";
-  dotfiles checkout 2>&1 | egrep "\s+/." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
-fi;
+# Checkout the actual content from the bare repository
+# -f will rewrite the already existing files
+dotfiles checkout -f
 
 # Configure git to ignore untracked files
 dotfiles config status.showUntrackedFiles no
