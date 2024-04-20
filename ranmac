@@ -1,4 +1,6 @@
 #!/bin/bash
+#
+# Randomize MAC address with NetworkManager
 
 # Configuration file path
 RANDOM_MAC_CONFIG_FILE="/etc/NetworkManager/conf.d/00-random-mac-addresses.conf"
