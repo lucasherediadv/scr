@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Create a new note in the required format and save it in the 
+# specified directory
 
 # Prompt the user for a filename
 get_filename() {
