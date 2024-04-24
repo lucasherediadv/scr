@@ -1,6 +1,4 @@
-"""Check the integrity of a file based on their provided hash.
-By comparing the calculated hash with a user-provided hash, you can
-ensure that files have not been tampered with."""
+"""Check the integrity of a file based on their provided hash."""
 
 import os
 import hashlib
@@ -8,12 +6,29 @@ from pathlib import Path
 
 
 def validate_file(file_path):
-    """Validates the existence of a file."""
+    """
+    Validates the existence of a file.
+
+    Args:
+        file_path (str): Path to the file.
+
+    Returns:
+        bool: True if the file exists and is a regular file, False otherwise
+    """
     return os.path.exists(file_path) and os.path.isfile(file_path)
 
 
 def calculate_hash(file_path):
-    """Calculates the hash of a file using the specified algorithm."""
+    """
+    Calculates the hash of a file using the specified algorithm.
+
+    Args:
+        file_path (str): Path to the file.
+
+    Returns:
+        Optional[str]: The hexadeciaml representation of the calculated
+        hash, or None if the file does not exists.
+    """
     hash_obj = hashlib.sha256()
     chunk_size = 65536
 
@@ -30,9 +45,18 @@ def calculate_hash(file_path):
         return None
 
 
-def check_integrity(file_path, user_provided_hash):
-    """Checks the integrity of a file by comparing its calculated hash
-    with a user provided hash."""
+def check_integrity(file_path, user_hash):
+    """
+    Checks the integrity of a file by comparing its calculated hash
+    with a user provided hash.
+
+    Args:
+        file_path (str): Path to the file.
+        user_hash (str): Expected hash provided by the user.
+
+    Returns:
+        None
+    """
     expanded_file_path = Path(file_path).expanduser()
 
     if not validate_file(expanded_file_path):
@@ -40,15 +64,15 @@ def check_integrity(file_path, user_provided_hash):
         return False
 
     calculated_hash = calculate_hash(expanded_file_path)
-    if calculated_hash == user_provided_hash:
+    if calculated_hash == user_hash:
         print(
             "\nIntegrity check successful! The hashes match:\n"
-            f"File: {expanded_file_path}\n"
-            f"Provided hash: {user_provided_hash}\n"
+            f"\nFile: {expanded_file_path}\n"
+            f"Provided hash: {user_hash}\n"
             f"Calculated hash: {calculated_hash}\n"
         )
     else:
-        print("WARNING: The calculated hash does not match the provided hash.")
+        print("\nWARNING: The calculated hash does not match the provided hash.\n")
     return None
 
 
