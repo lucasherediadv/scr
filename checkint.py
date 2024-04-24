@@ -1,4 +1,13 @@
-"""Check the integrity of a file based on their provided hash."""
+"""
+Verify the integrity of a file by comparing its hash with a user
+provided hash. The program calculates the SHA-256 hash of the
+specified file and check if it matches the expected.
+
+Usage:
+    - Run the script with python.
+    - Follow the prompts to enter the file path and the expected hash.
+    - The program will display wether the hashes match or not.
+"""
 
 import os
 import hashlib
@@ -13,7 +22,7 @@ def validate_file(file_path):
         file_path (str): Path to the file.
 
     Returns:
-        bool: True if the file exists and is a regular file, False otherwise
+        bool: True if the file exists and is a regular file, False otherwise.
     """
     return os.path.exists(file_path) and os.path.isfile(file_path)
 
@@ -57,17 +66,19 @@ def check_integrity(file_path, user_hash):
     Returns:
         None
     """
-    expanded_file_path = Path(file_path).expanduser()
+    # Expands the tile character (~) in "file_path" to the user's
+    # home directory.
+    expanded_path = Path(file_path).expanduser()
 
-    if not validate_file(expanded_file_path):
-        print(f"File '{expanded_file_path}' does not exists.")
+    if not validate_file(expanded_path):
+        print(f"File '{expanded_path}' does not exists.")
         return False
 
-    calculated_hash = calculate_hash(expanded_file_path)
+    calculated_hash = calculate_hash(expanded_path)
     if calculated_hash == user_hash:
         print(
             "\nIntegrity check successful! The hashes match:\n"
-            f"\nFile: {expanded_file_path}\n"
+            f"\nFile: {expanded_path}\n"
             f"Provided hash: {user_hash}\n"
             f"Calculated hash: {calculated_hash}\n"
         )
@@ -77,10 +88,10 @@ def check_integrity(file_path, user_hash):
 
 
 def main():
-    """Main execution"""
-    file_to_check = input("Enter the file path to check integrity: ")
+    """Main execution."""
+    file_path = input("\nEnter the file path to check integrity: ")
     user_hash = input("Enter the expected hash: ")
-    check_integrity(file_to_check, user_hash)
+    check_integrity(file_path, user_hash)
 
 
 if __name__ == "__main__":
