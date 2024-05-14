@@ -4,4 +4,4 @@
 # "//" is a global search and replace syntax of several text processing programs.
 # It is known as parameter expansion in bash.
 
-echo -e ${PATH//:/\\n}
+echo -e "${PATH//:/\\n}"
