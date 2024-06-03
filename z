@@ -1,7 +1,6 @@
 #!/bin/bash
 #
-# Create a new note in the required format and save it in the 
-# specified directory
+# Create a new note in the required format and save it in the specified directory
 
 # Prompt the user for a filename
 get_filename() {
@@ -21,32 +20,19 @@ open_file() {
   local filename="$2"
   local full_filename="$target_directory/$filename.md"
 
-  # Create an empty markdown file
   touch "$full_filename"
 
-  # Get the current timestamp
   timestamp="$(date +"%Y-%m-%d-%H:%M:%S")"
 
-  # Capitalize the first word of the filename and replace hyphens and
-  # underscores with a single blank space
-  format_filename=$(echo "$filename" | sed 's/[-_]/ /g; s/^./\u&/')
-
-  # Add header and initial content to the file
   {
     echo "# $timestamp"
-    echo -en "\n"
-    echo "## $format_filename"
     echo -en "\n""\n"
   } >>"$full_filename"
   
-  # Open vim in normal mode and position the cursor at the last line
-  vim '+ normal G' "$full_filename"
+  vim "+ normal G" "$full_filename"
 }
 
-# Create the file in the following directory
 target_directory="$GHREPOS/zet"
 
-# Call the functions
 get_filename
 open_file "$target_directory" "$filename"
-
