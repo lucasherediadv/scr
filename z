@@ -44,7 +44,7 @@ open_file() {
 }
 
 # Create the file in the following directory
-target_directory="$HOME/notes"
+target_directory="$GHREPOS/zet"
 
 # Call the functions
 get_filename
