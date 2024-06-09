@@ -1,11 +1,11 @@
 #!/bin/bash
 #
-# Create a new note in the required format and save it in the specified directory
+# Create a new note in my zet repository
 
 # Prompt the user for a filename
 get_filename() {
   while true; do
-    read -rp "Enter the filename (without extension): " filename
+    read -rp "Enter a filename: " filename
     if [[ -z "$filename" ]]; then
       echo "Please provide a valid filename"
     else
@@ -14,7 +14,7 @@ get_filename() {
   done
 }
 
-# Create and open file
+# Create, format and open file
 open_file() {
   local target_directory="$1"
   local filename="$2"
@@ -22,17 +22,20 @@ open_file() {
 
   touch "$full_filename"
 
-  timestamp="$(date +"%Y%m%d%H%M%S")"
+  format_filename=$(echo "$filename" | sed 's/[-]/ /g; s/^./\u&/')
 
   {
-    echo "# $timestamp"
-    echo -en "\n""\n"
+    echo "# $format_filename"
+    echo -en "\n""\n""\n"
+    echo "# Links:"
+    echo -en "\n"
+    echo -en "- []()"
   } >>"$full_filename"
   
-  vim "+ normal G" "$full_filename"
+  vim "$full_filename"
 }
 
-target_directory="$GHREPOS/zet/docs"
+target_directory="$GHREPOS/zet/doc"
 
 get_filename
 open_file "$target_directory" "$filename"
