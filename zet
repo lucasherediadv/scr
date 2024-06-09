@@ -27,7 +27,7 @@ open_file() {
   {
     echo "# $format_filename"
     echo -en "\n""\n""\n"
-    echo "# Links:"
+    echo "# Links"
     echo -en "\n"
     echo -en "- []()"
   } >>"$full_filename"
