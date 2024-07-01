@@ -35,7 +35,7 @@ open_file() {
   vim "$full_filename"
 }
 
-target_directory="$GHREPOS/zet/doc"
+target_directory="$ZET/doc"
 
 get_filename
 open_file "$target_directory" "$filename"
