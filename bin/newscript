@@ -8,7 +8,7 @@ if [ $# -eq 0 ]; then
   read -rp "Please provide a name for the script: " name
 fi
 
-cd "$SCRIPTS" || exit
+cd "$SCRIPTS/bin" || exit
 touch "$name"
 chmod +x "$name"
 {
