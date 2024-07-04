@@ -2,7 +2,7 @@
 #
 # Remove old kernels from a system using the DNF package manager.
 
-old_kernels=($(dnf repoquery --installonly --latest-limit=-1 -q))
+old_kernels="$(dnf repoquery --installonly --latest-limit=-1 -q)"
 if [ "${#old_kernels[@]}" -eq 0 ]; then
   echo "No old kernels found"
   exit 0
