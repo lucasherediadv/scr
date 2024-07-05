@@ -32,7 +32,7 @@ open_file() {
     echo -en "- []()"
   } >>"$full_filename"
   
-  vim "$full_filename"
+  vi "$full_filename"
 }
 
 target_directory="$ZET/doc"
