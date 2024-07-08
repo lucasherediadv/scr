@@ -19,17 +19,17 @@ open_file() {
   local target_directory="$1"
   local filename="$2"
   local full_filename="$target_directory/$filename.md"
+  format_filename=$(echo "$filename" | sed 's/[-]/ /g; s/^./\u&/')
+  timestamp="$(date +"%Y-%m-%d")"
 
   touch "$full_filename"
 
-  format_filename=$(echo "$filename" | sed 's/[-]/ /g; s/^./\u&/')
-
   {
-    echo "# $format_filename"
-    echo -en "\n""\n""\n"
-    echo "## Links"
-    echo -en "\n"
-    echo -en "- []()"
+    echo "---"
+    echo "title: $format_filename"
+    echo "date: $timestamp"
+    echo "tags:"
+    echo "---"
   } >>"$full_filename"
   
   vi "$full_filename"
