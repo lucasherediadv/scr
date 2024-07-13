@@ -19,8 +19,9 @@ open_file() {
   local target_directory="$1"
   local filename="$2"
   local full_filename="$target_directory/$filename.md"
+
   format_filename=$(echo "$filename" | sed 's/[-]/ /g; s/^./\u&/')
-  timestamp="$(date +"%Y-%m-%d")"
+  timestamp="$(date +"%Y-%m-%d %H:%M:%S")"
 
   touch "$full_filename"
 
@@ -35,7 +36,7 @@ open_file() {
   vi "$full_filename"
 }
 
-target_directory="$ZET/doc"
+target_directory="$GHREPOS/zet/doc"
 
 get_filename
 open_file "$target_directory" "$filename"
