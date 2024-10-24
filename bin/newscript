@@ -16,4 +16,4 @@ touch "$name" && chmod u+x "$name"
   echo "#"
 } >> "$name"
 
-vi "$name"
+"$EDITOR" "$name"
