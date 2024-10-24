@@ -1,8 +1,0 @@
-#!/bin/bash
-#
-# Create a new note in my zettelkasten
-
-timestamp="$(date +"%Y%m%d%H%M%S")"
-filename="$GHREPOS/zet/docs/$timestamp.md"
-touch "$filename"
-vi "$filename"
