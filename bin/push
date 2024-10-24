@@ -2,7 +2,7 @@
 #
 # Push changes to remote repository
 
-read -p "Enter commit message: " commitmessage
+read -rp "Enter commit message: " commitmessage
 git add .
 git commit -m "$commitmessage"
 git push
