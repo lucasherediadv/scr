@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# Open a centered tmux pane
+e
+if [ -z "$TMUX" ]; then
+  echo "Not inside a tmux session"
+  exit 0
+fi
+
+center() {
+  local NVIM_COMMAND="nvim -c 'set shortmess+=I' -c 'set laststatus=0' -c 'set noruler'"
+  local PANE_WIDTH=20
+
+  tmux split-window -h
+  tmux split-window -h
+  tmux select-pane -t 1
+  tmux resize-pane -t 0 -x "$PANE_WIDTH"
+  tmux resize-pane -t 2 -x "$PANE_WIDTH"
+  tmux send-keys -t 0 "$NVIM_COMMAND" C-m
+  tmux send-keys -t 2 "$NVIM_COMMAND" C-m
+}
+
+center
