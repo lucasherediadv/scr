@@ -9,7 +9,7 @@ fi
 
 center() {
   local NVIM_COMMAND="nvim -c 'set shortmess+=I' -c 'set laststatus=0' -c 'set noruler'"
-  local PANE_WIDTH=20
+  local PANE_WIDTH=40
 
   tmux split-window -h
   tmux split-window -h
