@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Open a centered tmux pane
-e
+
 if [ -z "$TMUX" ]; then
   echo "Not inside a tmux session"
   exit 0
