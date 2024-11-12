@@ -9,4 +9,4 @@ if [ -z "$TMUX" ]; then
 fi
 
 center
-tmux send-keys -t 1 "nvim '$1'" C-m
+tmux send-keys -t 1 "'$EDITOR' '$1'" C-m
